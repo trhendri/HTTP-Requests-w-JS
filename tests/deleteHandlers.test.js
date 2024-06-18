@@ -16,7 +16,7 @@ const requestBody = {
 // Create a Kit
 let newKitId;
 let grabjson;
-let actualResponseCode;
+let actualStatusCode;
 let bodyResponse;
 test('Check response status code 200 after delete and response body', async () => {
     
@@ -30,12 +30,12 @@ test('Check response status code 200 after delete and response body', async () =
 			},
 			body: JSON.stringify(requestBody)
 		});
-		actualResponseCode = response.status;
+		
 		//grab json
 		grabjson = await response.json();
 		// grab json id
 		newKitId = grabjson.id;
-		let actualStatusCode;
+	
 	} catch (error) {
 		console.error(error);
 	} 
