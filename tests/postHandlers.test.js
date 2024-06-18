@@ -5,7 +5,7 @@ const requestBody = {
     // Create a kit
 	"cardId": 1,
 	"name": "VS KIT"
-	}
+	} 
 
 
 

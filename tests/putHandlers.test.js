@@ -4,7 +4,7 @@ const config = require('../config');
 const requestBody = {
 "name": "This is a renamed Kit"
 
-}
+}  
 
 // Rename the Kit Name
 

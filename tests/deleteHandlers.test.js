@@ -8,7 +8,7 @@ const requestBody = {
     
 	"cardId": 1,
 	"name": "VS KIT"
-	}
+	} 
 
 
 
