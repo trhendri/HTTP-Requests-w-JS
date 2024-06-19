@@ -78,7 +78,7 @@ test('Response body OK should return true', async () => {
 // Validate kit was updated in database with get request
 // RESULTS IN BUG 500 status
 test (`Validate kit was updated in database with GET status 200`, async () => {
-
+let actualStatusCode;
 	try {
 		const response = await fetch(`${config.API_URL}/api/v1/kits/${newKitId}`);
 		actualStatusCode = response.status;

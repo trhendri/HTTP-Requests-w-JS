@@ -57,7 +57,7 @@ test('Response body card name should contain "For the situation"', async () => {
 
 // Validate New kit was created
 test (`Should validate that new kit was created with Get Request with status 200`, async () => {
-
+let actualStatusCode;
 	try {
 		const response = await fetch(`${config.API_URL}/api/v1/kits/${newKitId}`);
 		actualStatusCode = response.status;

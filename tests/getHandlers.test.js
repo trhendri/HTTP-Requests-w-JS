@@ -16,7 +16,6 @@ const requestBody = {
 	// Create a Kit
 	
 	test('Should return status code 200', async () => {
-		let actualResponseCode;
 		try {
 	
 			const response = await fetch(`${config.API_URL}/api/v1/kits?cardid=1`, {
