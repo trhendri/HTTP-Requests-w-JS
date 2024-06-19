@@ -2,21 +2,51 @@
 const config = require('../config');
 
 const requestBody = {
+	// Create a kit
+	"cardId": 1,
+	"name": "NEW KIT"
+	} 
+
+const requestBody2 = {
 "name": "This is a renamed Kit"
 
 }  
 
+let grabjson;
+let newKitId;
+
 // Rename the Kit Name
 
-test('Check status code of renamed kit', async () => {
+test('Status code of renamed kit should return 200', async () => {
+
+// Create New Kit
+
+try {
+	
+	const response = await fetch(`${config.API_URL}/api/v1/kits?cardid=1`, {
+		method: 'POST',
+		headers: {
+		'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(requestBody)
+	});
+	//grab json
+grabjson = await response.json();
+// grab json id
+newKitId = grabjson.id;
+
+} catch (error) {
+	console.error(error);
+}
+//Update Kit
 	let actualStatusCode;
     try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/3`, {
+		const response = await fetch(`${config.API_URL}/api/v1/kits/${newKitId}`, {
 			method: 'PUT',
 			headers: {
 			'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(requestBody)
+			body: JSON.stringify(requestBody2)
 		});
 		actualStatusCode = response.status;
 	} catch (error) {
@@ -27,10 +57,10 @@ test('Check status code of renamed kit', async () => {
 });
 
 // Check that ok = true confirming Kit rename.
-test('Check response body for ok true', async () => {
+test('Response body OK should return true', async () => {
 	let actualResponseBody;
     try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/3`, {
+		const response = await fetch(`${config.API_URL}/api/v1/kits/${newKitId}`, {
 			method: 'PUT',
 			headers: {
 			'Content-Type': 'application/json'
@@ -43,4 +73,17 @@ test('Check response body for ok true', async () => {
 	}
 
 	expect(actualResponseBody.ok).toBeTruthy();
+});
+
+// Validate kit was updated in database with get request
+// RESULTS IN BUG 500 status
+test (`Validate kit was updated in database with GET status 200`, async () => {
+
+	try {
+		const response = await fetch(`${config.API_URL}/api/v1/kits/${newKitId}`);
+		actualStatusCode = response.status;
+	} catch (error) {
+		console.error(error);
+	}
+	expect(actualStatusCode).toBe(200);
 });
